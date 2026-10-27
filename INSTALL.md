@@ -302,12 +302,17 @@ python3 ~/Projects/hermes-team/tools/lab.py check
 | 1 | `#hermes` | `넌 누구야?` (멘션 없이) | PI만 답한다 |
 | 2 | `#hermes` | `@coder 넌 누구야?` | coder만 답한다. PI는 `—`만 보내거나 조용하다 |
 | 3 | `#hermes` | analyst, reviewer, writer, scholar에게도 2번처럼 | 각자 자기 역할을 소개한다 |
-| 4 | `#hermes` | `새 프로젝트 만들자: 간단한 선형회귀 데모` | PI가 이름·태그를 제안 → "좋아" → `Projects`에 새 채널, `~/Projects/<이름>`, kanban 보드가 생기고 링크를 보고한다 |
-| 5 | 새 프로젝트 채널 | `상태 알려줘` | 첫 줄에 `[태그]`, 표 형식 상태 보고 |
+| 4 | `#hermes` | `새 프로젝트 만들자: 간단한 선형회귀 데모` | PI가 이름·태그를 제안 → "좋아" → `Projects`에 새 채널, `~/Projects/<이름>`, kanban 보드가 생기고 링크를 보고한다. **보고 직후 게이트웨이가 15초 뒤 재시작된다** (새 채널 연결을 읽으려고) |
+| 5 | 새 프로젝트 채널 (4번 후 **30초쯤 기다렸다가**) | `상태 알려줘` | 첫 줄에 `[태그]`, 표 형식 상태 보고. PI는 새 채널에서 먼저 말을 걸지 않으므로 내가 첫 메시지를 보낸다 |
 | 6 | 새 프로젝트 채널 | `데이터 생성 스크립트 하나 만들어줘` | PI가 카드 생성 → coder가 Claude Code로 작성 → reviewer 검토 → PI가 diff 보고 + commit 승인 요청 |
 | 7 | 새 프로젝트 채널 | `@coder 기억해: 코드 스타일 — 타입 힌트 필수` | 답 끝에 `기억함: ...` |
 
 6번 진행 상황은 터미널에서 볼 수 있다: `hermes kanban --board <프로젝트> list`
+
+**반응이 없을 때**
+1. 재시작 중일 수 있다 — 30초~1분 기다렸다가 다시 보낸다. 확인: `hermes gateway status`
+2. 그래도 조용하면 그 채널에서 그 봇에게 `/reset` (`/` 입력 → 봇별 명령 목록에서 그 봇의 `/reset`) 후 다시 보낸다. 이전 대화가 옛 설정·옛 SOUL을 붙잡고 있을 때 생긴다
+3. 그래도 안 되면 `python3 ~/Projects/hermes-team/newproject.py list`로 채널이 등록됐는지, `python3 tools/lab.py check`로 채널 연결 블록이 있는지 확인하고 `hermes gateway restart --all`
 
 ---
 
