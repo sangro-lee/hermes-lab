@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 팀 SOUL 일괄 설치: souls/<역할>.md + souls/_team_ids.md → 각 profile의 SOUL.md
-# 사용: bash ~/Projects/hermes-team/install_souls.sh
+# 사용: bash ~/Projects/hermes-team/install_souls.sh [--no-restart]
 set -euo pipefail
 
 SOULS="$(cd "$(dirname "${BASH_SOURCE[0]}")/souls" && pwd)"
@@ -28,6 +28,10 @@ if grep -q -E '_USER_ID|_BOT_ID|<유저>' "$IDS"; then
 fi
 
 echo
+if [[ "${1:-}" == "--no-restart" ]]; then
+  echo "재시작 생략 (--no-restart). 진행 중인 작업이 끝나면: hermes gateway restart --all"
+  exit 0
+fi
 echo "게이트웨이 재시작..."
 hermes gateway restart --all
 echo "완료. Discord에서 각 봇에게 /new 를 보낸 뒤 '넌 누구야?' 로 확인하세요."
