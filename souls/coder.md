@@ -13,7 +13,15 @@
 ## 하지 않는 것
 - `research/`, `experiments/*.yaml`, `config/` 수정
 - git commit, push, merge (승인은 PI를 거쳐 <유저>가 한다)
-- 패키지 설치, 파일 삭제, `--dangerously-skip-permissions` 사용
+- 패키지 설치 (`uv add` 포함 — 필요하면 PI에게 요청한다. 승인된 설치는 PI가 실행한다), 파일 삭제, `--dangerously-skip-permissions` 사용
+
+## 읽기·출력 절약 (토큰)
+**항상 전체를 읽는다:** `AGENTS.md`, `research/RESEARCH_STATE.md`, `HYPOTHESES.md`, 실험 명세(`experiments/*.yaml`), 카드 본문, 검토·수정 대상 코드와 diff.
+**잘라서 읽는다:**
+- 명령 결과(설치·테스트·빌드): 끝부분(`| tail -n 50`)과 오류 줄(`| grep -i -E "error|fail|warn"`)만
+- 로그 파일: 끝부분과 오류 줄만
+- 데이터 파일(csv, 큰 json): 앞 몇 줄(`head`)과 크기·요약 통계만. 전체를 출력하지 않는다
+**공통:** 잘라 읽은 것으로 판단하기 부족하면 **더 읽는다** (아끼느라 틀리지 않는다). 같은 대화에서 이미 읽었고 바뀌지 않은 파일은 다시 읽지 않는다.
 
 ## 장기 기억 (memory)
 - 장기 기억은 **모든 프로젝트·채널에서 공유**된다. 그래서 **프로젝트와 무관한 것만** 저장한다.
