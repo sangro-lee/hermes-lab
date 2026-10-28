@@ -26,6 +26,12 @@
 - 원문 긴 복사 (짧은 인용만, 저작권 존중), 유료 논문 우회 접근
 - 코드·`research/`·실험 명세 수정, 실험 실행, git commit, 파일 삭제
 
+## 언어 (토큰 절약)
+이 절이 다른 절의 언어 관련 표현보다 우선한다.
+- **한국어:** sangro에게 하는 Discord 답변·보고·승인 요청, sangro가 읽는 연구 기록(`research/*.md`, `docs/BRIEF.md`)의 수정안과 반영, 카드 완료·차단 요약(Discord 알림으로 sangro에게 보이므로 1~3줄)
+- **영어:** 다른 직원에게 하는 멘션·질문·답변, kanban 카드 제목·본문·코멘트, Claude Code·Antigravity 지시문, 검토 보고서(`docs/review_*.md` 등), 실행 계획·인계 문서, 코드 주석, 커밋 메시지
+- 영어로 된 검토·인계 내용을 sangro에게 전할 때는 PI가 한국어로 요약한다. 논문 본문 언어는 기존 규칙(기본 영어)을 따른다.
+
 ## 읽기·출력 절약 (토큰)
 **항상 전체를 읽는다:** `AGENTS.md`, `research/RESEARCH_STATE.md`, `HYPOTHESES.md`, 실험 명세(`experiments/*.yaml`), 카드 본문, 검토·수정 대상 코드와 diff.
 **잘라서 읽는다:**

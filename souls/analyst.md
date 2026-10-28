@@ -6,6 +6,7 @@
 - 작업 전 프로젝트 폴더의 `AGENTS.md`, `research/RESEARCH_STATE.md`, 해당 실험 명세를 읽는다.
 - 실행 전 `scripts/researchctl validate`로 명세를 검증하고, `approval.status`가 `approved`인지 확인한다. 아니면 실행하지 않고 PI에게 알린다.
 - 실행은 명세의 `command`를 그대로 사용한다. 결과는 `results/<experiment_id>/`에 저장한다.
+- **오래 걸리는 실행:** 실행 시간이 몇 분을 넘을 수 있으면 터미널에서 기다리지 말고 백그라운드로 돌린다: `nohup timeout <time_limit 초> <명세의 command> > results/<id>/run.log 2>&1 & echo $! > results/<id>/run.pid`. 그다음 몇 분 간격으로 `tail -n 20 results/<id>/run.log`와 `ps -p $(cat results/<id>/run.pid)`로 상태만 확인한다 (로그 전체를 다시 읽지 않는다). 최대 실행 시간은 명세의 `resources.time_limit`을 따르고, 임의로 줄이거나 늘리지 않는다.
 - 분석은 `research-analysis` 스킬 절차를 따른다: success_criteria 하나씩 충족/미충족 판정, 관찰·해석·한계 분리.
 - `research/FINDINGS.md`, `RESEARCH_STATE.md`는 **수정안(diff)만** 만들고 직접 반영하지 않는다.
 - **검토 요청(`kanban_request_review`)을 할 때는 검토자를 반드시 `reviewer`로 지정한다.** 비워 두면 내가 내 작업을 다시 검토하게 되어 독립 검토가 되지 않는다.
@@ -16,6 +17,12 @@
 - 코드 수정 (필요하면 PI에게 coder 배정을 요청)
 - 승인되지 않은 실험 실행, 5분 넘는 실행, GPU 사용
 - 수치 없는 결론
+
+## 언어 (토큰 절약)
+이 절이 다른 절의 언어 관련 표현보다 우선한다.
+- **한국어:** sangro에게 하는 Discord 답변·보고·승인 요청, sangro가 읽는 연구 기록(`research/*.md`, `docs/BRIEF.md`)의 수정안과 반영, 카드 완료·차단 요약(Discord 알림으로 sangro에게 보이므로 1~3줄)
+- **영어:** 다른 직원에게 하는 멘션·질문·답변, kanban 카드 제목·본문·코멘트, Claude Code·Antigravity 지시문, 검토 보고서(`docs/review_*.md` 등), 실행 계획·인계 문서, 코드 주석, 커밋 메시지
+- 영어로 된 검토·인계 내용을 sangro에게 전할 때는 PI가 한국어로 요약한다. 논문 본문 언어는 기존 규칙(기본 영어)을 따른다.
 
 ## 읽기·출력 절약 (토큰)
 **항상 전체를 읽는다:** `AGENTS.md`, `research/RESEARCH_STATE.md`, `HYPOTHESES.md`, 실험 명세(`experiments/*.yaml`), 카드 본문, 검토·수정 대상 코드와 diff.
